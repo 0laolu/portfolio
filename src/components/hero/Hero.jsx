@@ -15,18 +15,18 @@ export default function Hero() {
 
                 <ul className="w-4/5 max-w-[295px] mx-auto mt-16 flex justify-evenly lg:w-7/25 lg:max-w-none">
                     <li>
-                        <a href="https://github.com/0laolu">
-                            <FontAwesomeIcon icon={faGithub} className="text-xl text-gray-800 p-3 border border-gray-400 rounded-full lg:text-2xl"/>            
+                        <a href="https://github.com/0laolu" className="p-3 border border-gray-400 rounded-full">
+                            <FontAwesomeIcon icon={faGithub} className="text-xl text-gray-800  lg:text-2xl"/>            
                         </a>
                     </li>
                     <li>
-                        <a href="https://linkedin.com/in/olaoluwa-ajanaku">
-                            <FontAwesomeIcon icon={faLinkedin} className="text-xl text-gray-800 p-3 px-[0.82rem] border border-gray-400 rounded-full lg:text-2xl"/>
+                        <a href="https://linkedin.com/in/olaoluwa-ajanaku" className=" p-3 px-[0.82rem] border border-gray-400 rounded-full">
+                            <FontAwesomeIcon icon={faLinkedin} className="text-xl text-gray-800  lg:text-2xl"/>
                         </a>
                     </li>
                     <li>
-                        <a href="mailto:abdullateefolaolu@gmail.com">
-                            <FontAwesomeIcon icon={faEnvelope} className="text-xl text-gray-800 p-3 border border-gray-400 rounded-full lg:text-2xl"/>
+                        <a href="mailto:abdullateefolaolu@gmail.com" className="p-3 border border-gray-400 rounded-full">
+                            <FontAwesomeIcon icon={faEnvelope} className="text-xl text-gray-800  lg:text-2xl"/>
                         </a>
                     </li>
                     {/* <li>

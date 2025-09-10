@@ -17,7 +17,7 @@ export default function Navbar() {
 
     return (
         <header>
-            <nav className="  w-9/10 mx-auto pt-4 flex justify-between items-center">
+            <nav className="  w-9/10 max-w-[800px] mx-auto pt-4 flex justify-between items-center lg:max-w-none">
                 <div className="text-2xl font-bold">O.A.</div>
 
                 {/*hamburger menu*/}
