@@ -1,18 +1,54 @@
 
 export default function AboutContent() {
     return(
-        <div className="w-full lg:w-1/2">
-            <p className="text-base text-gray-700 font-league mt-[1rem] mb-[2rem] font-base tracking-wide lg:text-[1.1rem]/[1.8rem]">
-                I help businesses, startups and personal brands turn ideas into modern, high-performing websites that look great and work even better. <span className=" border-b-2 border-solid border-gray-500">From creating attractive landing pages that drive conversions, to fully functional authentication systems and backend APIs, I build scalable solutions that solve real problems.</span>
-
-                <span className="pt-[1rem] block">With the aid of modern technologies like React, Node js, and MongoDB (MERN), I focus on building websites that are user-friendly, load fast and work seamlessly across all devices.</span>
-                <span className="pt-[1rem] block">Whether you're launching a new product, need a redesign, or want a developer who can build both frontend and backend systems, I am here to make that happen by incorporating clean code, smooth user experience, and reliable delivery.</span>
-                <span className="pt-[1rem] block">Let's build something that not only looks good, but performs even better.</span>
-            </p>
-
-            <div className="mt-12 flex justify-center lg:block lg:mt-0">
-                <button className="w-4/5 max-w-[295px] border border-gray-400 py-4 rounded-xl font-semibold cursor-pointer lg:w-7/20 lg:max-w-none" type="button">Let's work together</button>
+        <div className="about-content-wrapper w-full my-16">
+            <div className=" numbers-container w-4/5 mx-auto relative mt-4">
+                <span className="line-through border-gray-500 border-t-1 w-full flex absolute top-7 z-[-2]"></span>
+                <div className="w-full flex justify-between">
+                    <p className="bg-white text-lg text-gray-600 font-semibold border border-gray-500 rounded-full py-3 px-[1.35rem]">1</p>
+                    <p className="bg-white text-lg text-gray-600 font-semibold border border-gray-500 rounded-full py-3 px-[1.35rem]">2</p>
+                    <p className="bg-white text-lg text-gray-600 font-semibold border border-gray-500 rounded-full py-3 px-[1.35rem]">3</p>
+                    <p className="bg-white text-lg text-gray-600 font-semibold border border-gray-500 rounded-full py-3 px-[1.35rem]">4</p>
+                </div>
+            </div>
+            <div className="about-content w-full flex justify-between mt-8">
+                {
+                    contentData.map(content => (
+                        <div key={content.id} className="content-card w-6/25 text-center">
+                            <h3 className="card-title text-[1.2rem] font-semibold my-2">{content.title}</h3>
+                            <p className="card-description">{content.description}</p>
+                        </div>
+                    ))
+                }
             </div>
         </div>
     )
 }
+
+
+const contentData = [
+    {
+        id: 1,
+        icon: "",
+        title: "Discovery & Goals",
+        description: "We begin with a quick call to learn about and understand your business, your audience, and your goals. By the end, you'll have a clear plan for how your website will achieve results"
+    }, 
+    {
+        id: 2,
+        icon: "",
+        title: "Setup & Preview",
+        description: "I’ll create a simple, clickable prototype so you can see exactly how your site will look and feel. This lets you preview the structure and share feedback before full development begins"
+    },
+    {
+        id: 3,
+        icon: "",
+        title: "Development & Testing",
+        description: "This is where your site comes to life. I transform the design into a fast, mobile-first site optimized for conversions. You'll see progress updates, and everything is tested across devices before launch"
+    },
+    {
+        id: 4,
+        icon: "",
+        title: "Launch & Support",
+        description: "Once approved, we launch your site. I'll also guide you through updating content yourself and provide ongoing support to make sure your website keeps performing for your business"
+    }
+]
