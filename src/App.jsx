@@ -20,6 +20,11 @@ function App() {
       <Technologies/>
       <Contact/>
     </>
+    // <div className=".bg-card p-8">
+    //   <h1 className="font-display grad-text text-5xl">It's working.</h1>
+    //   <p className="font-body text-[var(--color-muted)] mt-2">DM Sans body text.</p>
+    //   <div className="glow-line mt-4"></div>
+    // </div>
   )
 }
 

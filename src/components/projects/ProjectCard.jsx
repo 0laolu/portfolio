@@ -14,6 +14,11 @@ export default function ProjectCard() {
                             <div className="text-gray-700 text-[1.1rem] font-league">
                                 <h4 className="text-gray-800 font-bold text-3xl">{info.title}</h4>
                                 <p className="project-description my-4">{info.description}</p>
+                                
+                                <div>
+                                    <h4 className="text-[1.2rem] font-bold">Who This Was For:</h4>
+                                    <p className="">{info.targetAudience}</p>
+                                </div>
                                 <div className="role"><span className=" text-[1.2rem] font-bold block mt-3">What I Did:</span>
                                     <ul className="my-2 mb-4">
                                         <li className="mb-2 ">• {info.role.first}</li>
@@ -22,6 +27,10 @@ export default function ProjectCard() {
                                         <li className="mb-2 ">• {info.role.third}</li>
                                         <li className="">• {info.role.fourth}</li>
                                     </ul>
+                                </div>
+                                <div>
+                                    <h4 className="text-[1.2rem] font-bold">Result:</h4>
+                                    <p className="">{info.result}</p>
                                 </div>
                                 <ul className="project-tools  lg:flex justify-between flex-wrap">
                                     {
@@ -71,6 +80,7 @@ const projectData = [
         // description: "The Cardio Health is a full-stack health awareness platform designed to make vital heart health information accessible to anyone, anywhere. It combines an engaging blog system with an email subscription feature, helping users stay updated with the latest tips, resources, and insights on cardiovascular wellness.",
         description: "A full-stack health awareness platform designed to make vital heart health information accessible to anyone, using an engaging blog system with an email subscription feature.",
         tools: ["React JS", "Node JS", "Express JS", "MongoDB", "ReactQuill", "Cloudinary", "Substack"],
+        targetAudience: "A health-focused organization publishing educational content for the public",
         role: {
           first: "Built a dynamic blog system so new articles, updates, or even campaigns can be published in minutes",
           second: "Integrated an email subscription flow that converts visitors into regular readers by sending updates to their inbox",
@@ -78,6 +88,7 @@ const projectData = [
           fourth: "Built efficient backend workflows that save you time on blogs and subscriber management",
           fifth: "Ensured fast load times and SEO-friendly structures, making the site easy to find on search engines and keeping users engaged longer"  
         },
+        result: "Enabled fast content publishing, improved search visibility, and built a scalable platform ready for future expansion.",
         importance: "This project demonstrates how i help clients build a fully functional business platform, publish content and grow email lists, all while keeping their site fast, modern and mobile ready. Ideal for NGOs, health orgs, or startups looking to engage an audience"
     }
 ]
