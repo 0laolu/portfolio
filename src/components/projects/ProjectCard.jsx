@@ -1,68 +1,79 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faGithub } from "@fortawesome/free-brands-svg-icons" 
 import { faArrowUpRightFromSquare } from "@fortawesome/free-solid-svg-icons"
-
+import { Link } from "react-router-dom"
+import projectData from "../../data/ProjectData"
 
 export default function ProjectCard() {
     return( 
         <>
             {
                 projectData.map(info => (
-                    <div key={info.id} className="flex justify-between items-center"> {/* project card */}
-
-                        <div className="lg:w-9/20 my-8">
-                            <div className="text-gray-700 text-[1.1rem] font-league">
-                                <h4 className="text-gray-800 font-bold text-3xl">{info.title}</h4>
-                                <p className="project-description my-4">{info.description}</p>
+                    <div key={info.id} className="flex flex-col lg:flex-row lg:justify-between lg:items-center gap-8 my-12">
+                        <div className="lg:w-9/20">
+                            <div className="text-[var(--color-muted)] text-[1rem] font-body">
+                                <h4 className="text-[var(--color-cream)] font-bold text-2xl lg:text-3xl font-display mb-4">{info.title}</h4>
+                                <p className="project-description mb-6 text-[var(--color-muted)]">{info.description}</p>
                                 
-                                <div>
-                                    <h4 className="text-[1.2rem] font-bold">Who This Was For:</h4>
-                                    <p className="">{info.targetAudience}</p>
+                                <div className="mb-5">
+                                    <h4 className="text-[var(--color-cream)] text-[1rem] font-semibold font-display">Who This Was For:</h4>
+                                    <p className="text-[var(--color-muted)] mt-1">{info.targetAudience}</p>
                                 </div>
-                                <div className="role"><span className=" text-[1.2rem] font-bold block mt-3">What I Did:</span>
-                                    <ul className="my-2 mb-4">
-                                        <li className="mb-2 ">• {info.role.first}</li>
-                                        <li className="mb-2 ">• {info.role.fifth}</li>
-                                        <li className="mb-2 ">• {info.role.second}</li>
-                                        <li className="mb-2 ">• {info.role.third}</li>
-                                        <li className="">• {info.role.fourth}</li>
+                                <div className="mb-5">
+                                    <span className="text-[var(--color-cream)] text-[1rem] font-semibold font-display block">What I Did:</span>
+                                    <ul className="mt-2 space-y-2">
+                                        <li className="text-[var(--color-muted)] flex items-start gap-2">
+                                            <span className="grad-text mt-[5px]">•</span>
+                                            {info.role.first}
+                                        </li>
+                                        <li className="text-[var(--color-muted)] flex items-start gap-2">
+                                            <span className="grad-text mt-[5px]">•</span>
+                                            {info.role.fifth}
+                                        </li>
+                                        <li className="text-[var(--color-muted)] flex items-start gap-2">
+                                            <span className="grad-text mt-[5px]">•</span>
+                                            {info.role.second}
+                                        </li>
+                                        <li className="text-[var(--color-muted)] flex items-start gap-2">
+                                            <span className="grad-text mt-[5px]">•</span>
+                                            {info.role.third}
+                                        </li>
+                                        <li className="text-[var(--color-muted)] flex items-start gap-2">
+                                            <span className="grad-text mt-[5px]">•</span>
+                                            {info.role.fourth}
+                                        </li>
                                     </ul>
                                 </div>
-                                <div>
-                                    <h4 className="text-[1.2rem] font-bold">Result:</h4>
-                                    <p className="">{info.result}</p>
+                                <div className="mb-6">
+                                    <h4 className="text-[var(--color-cream)] text-[1rem] font-semibold font-display">Result:</h4>
+                                    <p className="text-[var(--color-muted)] mt-1">{info.result}</p>
                                 </div>
-                                <ul className="project-tools  lg:flex justify-between flex-wrap">
+                                <ul className="project-tools flex flex-wrap gap-3">
                                     {
                                         info.tools.map(tool => (
-                                            <li className="bg-gray-200 text-gray-700 font-semibold border border-gray-50 px-3 py-2 my-2 rounded-md">{tool}</li>
+                                            <li key={tool} className="tech-pill">{tool}</li>
                                         ))
                                     }
                                 </ul>
-                                
 
-                                {/* <p className="project-importance"><span className="text-[1.2rem] font-bold block mt-3">Why It Matters:</span> 
-                                    {info.importance}
-                                </p> */}
-
-                                <div className=" w-3/5 mx-auto flex justify-between mt-7 lg:mx-0">
-                                    <a href="https://thecardiohealth.org" className="w-full max-w-[164px] text-base text-center font-semibold py-3 rounded-xl border border-gray-500 lg:text-lg ">
-                                        <span className="mr-3">Live URL</span>
+                                <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 mt-8 lg:mx-0">
+                                    <a href={info.liveUrl} className="btn-ghost text-center text-[0.85rem]">
+                                        <span className="mr-2">Live URL</span>
                                         <FontAwesomeIcon icon={faArrowUpRightFromSquare}/>
                                     </a>
 
-                                    <a href="https://github.com/0laolu/cardio_health_backend" className="w-full max-w-[194px] text-base text-center font-semibold py-3 rounded-xl border border-gray-500 lg:text-lg ">
-                                        <span className="mr-3">Github Code</span>
-                                        <FontAwesomeIcon icon={faGithub}/>
-                                    </a>
+                                    <Link
+                                        to={`/projects/${info.slug}`}
+                                        className="btn-primary grad-bg text-center text-[0.85rem]"
+                                    >
+                                        View Case Study
+                                    </Link>
                                 </div>
                             </div>
                         </div>
 
-                        <div className="img-container lg:w-12/25">
-                            <figure className=" border border-gray-100 px-8 py-16 flex justify-center items-center">
-                                <img src={info.image} alt="A mockup of The Cardio Health website" className="w-full" />
-                            </figure>
+                        <div className="img-container lg:w-12/25 group overflow-hidden rounded-lg relative">
+                            <img src={info.image} alt={`${info.title} mockup`} className="w-full transition-transform duration-300 group-hover:scale-105" />
+                            <div className="absolute inset-0 grad-bg opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
                         </div>
                     </div>
                 ))
@@ -72,25 +83,25 @@ export default function ProjectCard() {
 }
 
 
-const projectData = [
-    {
-        id: 1,
-        image: "/projectImages/thecardiohealthimage.jpg",
-        title: "THE CARDIO HEALTH",
-        // description: "The Cardio Health is a full-stack health awareness platform designed to make vital heart health information accessible to anyone, anywhere. It combines an engaging blog system with an email subscription feature, helping users stay updated with the latest tips, resources, and insights on cardiovascular wellness.",
-        description: "A full-stack health awareness platform designed to make vital heart health information accessible to anyone, using an engaging blog system with an email subscription feature.",
-        tools: ["React JS", "Node JS", "Express JS", "MongoDB", "ReactQuill", "Cloudinary", "Substack"],
-        targetAudience: "A health-focused organization publishing educational content for the public",
-        role: {
-          first: "Built a dynamic blog system so new articles, updates, or even campaigns can be published in minutes",
-          second: "Integrated an email subscription flow that converts visitors into regular readers by sending updates to their inbox",
-          third: "Developed a responsive, user-friendly interface that works seamlessly across all screen sizes ensuring the audience has a smooth experience",
-          fourth: "Built efficient backend workflows that save you time on blogs and subscriber management",
-          fifth: "Ensured fast load times and SEO-friendly structures, making the site easy to find on search engines and keeping users engaged longer"  
-        },
-        result: "Enabled fast content publishing, improved search visibility, and built a scalable platform ready for future expansion.",
-        importance: "This project demonstrates how i help clients build a fully functional business platform, publish content and grow email lists, all while keeping their site fast, modern and mobile ready. Ideal for NGOs, health orgs, or startups looking to engage an audience"
-    }
-]
+// const projectData = [
+//     {
+//         id: 1,
+//         image: "/projectImages/thecardiohealthimage.jpg",
+//         title: "THE CARDIO HEALTH",
+//         // description: "The Cardio Health is a full-stack health awareness platform designed to make vital heart health information accessible to anyone, anywhere. It combines an engaging blog system with an email subscription feature, helping users stay updated with the latest tips, resources, and insights on cardiovascular wellness.",
+//         description: "A full-stack health awareness platform designed to make vital heart health information accessible to anyone, using an engaging blog system with an email subscription feature.",
+//         tools: ["React JS", "Node JS", "Express JS", "MongoDB", "ReactQuill", "Cloudinary", "Substack"],
+//         targetAudience: "A health-focused organization publishing educational content for the public",
+//         role: {
+//           first: "Built a dynamic blog system so new articles, updates, or even campaigns can be published in minutes",
+//           second: "Integrated an email subscription flow that converts visitors into regular readers by sending updates to their inbox",
+//           third: "Developed a responsive, user-friendly interface that works seamlessly across all screen sizes ensuring the audience has a smooth experience",
+//           fourth: "Built efficient backend workflows that save you time on blogs and subscriber management",
+//           fifth: "Ensured fast load times and SEO-friendly structures, making the site easy to find on search engines and keeping users engaged longer"  
+//         },
+//         result: "Enabled fast content publishing, improved search visibility, and built a scalable platform ready for future expansion.",
+//         importance: "This project demonstrates how i help clients build a fully functional business platform, publish content and grow email lists, all while keeping their site fast, modern and mobile ready. Ideal for NGOs, health orgs, or startups looking to engage an audience"
+//     }
+// ]
 
 

@@ -1,26 +1,29 @@
-import { faArrowTrendUp, faGlobe, faHandHoldingUsd, faNewspaper, faServer, faUserCheck } from "@fortawesome/free-solid-svg-icons"
+import { faArrowTrendUp, faHandHoldingUsd, faNewspaper, faServer, faUserCheck } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 export default function ServicesContent() {
 
 
     return (
-        <div className="my-8 lg:flex flex-wrap justify-between">
+        <div className="my-8 lg:flex lg:flex-wrap lg:justify-between lg:gap-6">
             {
                 services.map(service => (
-                    <div key={service.id} className="">
-                        <div className="w-93/100 mx-auto py-[0.8rem]">
-                            <FontAwesomeIcon icon={service.icon} className="text-3xl" />
-                            <h4 className="text-gray-800 text-[1.2rem] font-bold font-league mb-[0.5rem]">{service.title}</h4>
-                            <p className="mb-4 italic text-[0.95rem]">{service.for}</p>
-                            {/* <p className="text-gray-600 font-league font-base tracking-wide text-[1.05rem]/6"></p> */}
-                            <ul className="list-disc">
+                    <div key={service.id} className="lg:w-[calc(50%-12px)]">
+                        <div className="card p-6 mb-6">
+                            <div className="grad-bg w-12 h-12 rounded-lg flex items-center justify-center mb-5">
+                                <FontAwesomeIcon icon={service.icon} className="text-xl text-[var(--color-bg)]" />
+                            </div>
+                            <h4 className="text-[var(--color-cream)] text-[1.1rem] font-bold font-display mb-2">{service.title}</h4>
+                            <p className="mb-5 text-[var(--color-muted)] text-[0.9rem] font-body italic">{service.for}</p>
+                            <ul className="space-y-3">
                                 {
-                                    service.bullets.map(point => (
-                                        <li className="text-gray-700 text-base font-base font-league">{point}</li>
+                                    service.bullets.map((point, index) => (
+                                        <li key={index} className="text-[var(--color-muted)] text-[0.9rem] font-body flex items-center gap-3">
+                                            <span className="grad-text">•</span>
+                                            <span>{point}</span>
+                                        </li>
                                     ))
                                 }
                             </ul>
-                            
                         </div>
                     </div>
                 ))

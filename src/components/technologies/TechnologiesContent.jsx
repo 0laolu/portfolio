@@ -102,13 +102,13 @@ export default function TechnologiesContent() {
             <button
               key={key}
               onClick={() => handleTechStack(key)}
-              className={`whitespace-nowrap rounded-md border font-league transition-all duration-300 cursor-pointer
+              className={`whitespace-nowrap rounded-md font-body transition-all duration-300 cursor-pointer
                 text-sm sm:text-base md:text-lg 
                 px-4 py-2 sm:px-6 sm:py-3
                 ${
                   stack === key
-                    ? "bg-gray-700 text-white border-gray-700"
-                    : "border-gray-400 text-gray-700 hover:bg-gray-100"
+                    ? "grad-bg text-[var(--color-bg)] border border-transparent"
+                    : "border border-[var(--color-border)] text-[var(--color-muted)] hover:border-[var(--color-border-hover)] hover:text-[var(--color-cream)]"
                 }`}
             >
               {label}
@@ -125,19 +125,19 @@ export default function TechnologiesContent() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -15 }}
             transition={{ duration: 0.4 }}
-            className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6"
+            className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6 place-items-center"
             >
             {activeStack.map((tech) => (
                 <motion.div
                 key={tech}
                 whileHover={{ scale: 1.05 }}
-                className="flex items-center justify-center
-                    bg-gray-100 border border-gray-200 text-gray-700
+                className="w-[200px] flex items-center justify-center
+                    card text-[var(--color-muted)] font-body
                     rounded-xl font-medium text-center
                     h-14 sm:h-16 md:h-18
-                    px-3 sm:px-4
+                    px-2 sm:px-4
                     text-sm sm:text-base
-                    shadow-sm"
+                    transition-colors duration-200 hover:border-[var(--color-border-hover)]"
                 >
                   {tech}
                 </motion.div>

@@ -1,22 +1,16 @@
-
 export default function AboutContent() {
     return(
         <div className="about-content-wrapper w-full my-16">
-            <div className=" numbers-container w-4/5 mx-auto relative mt-4">
-                <span className="line-through border-gray-500 border-t-1 w-full flex absolute top-7 z-[-2]"></span>
-                <div className="w-full flex justify-between">
-                    <p className="bg-white text-lg text-gray-600 font-semibold border border-gray-500 rounded-full py-3 px-[1.35rem]">1</p>
-                    <p className="bg-white text-lg text-gray-600 font-semibold border border-gray-500 rounded-full py-3 px-[1.35rem]">2</p>
-                    <p className="bg-white text-lg text-gray-600 font-semibold border border-gray-500 rounded-full py-3 px-[1.35rem]">3</p>
-                    <p className="bg-white text-lg text-gray-600 font-semibold border border-gray-500 rounded-full py-3 px-[1.35rem]">4</p>
-                </div>
-            </div>
-            <div className="about-content w-full flex justify-between mt-8">
+            <div className="about-content w-full flex flex-col lg:flex-row justify-between gap-8">
                 {
-                    contentData.map(content => (
-                        <div key={content.id} className="content-card w-6/25 text-center">
-                            <h3 className="card-title text-[1.2rem] font-semibold my-2">{content.title}</h3>
-                            <p className="card-description">{content.description}</p>
+                    contentData.map((content, index) => (
+                        <div key={content.id} className="content-card w-full lg:w-[345.58px] text-center">
+                            <div className="numbers-container mx-auto relative mt-4 mb-6">
+                                <span className="w-full flex absolute top-7 z-[-2] opacity-20 lg:hidden" style={{ borderTop: '1px solid var(--color-border-hover)' }}></span>
+                                <p className="grad-bg text-lg text-[var(--color-bg)] font-semibold rounded-full py-3 px-[1.35rem] mx-auto w-fit">{index + 1}</p>
+                            </div>
+                            <h3 className="card-title text-[var(--color-cream)] text-[1.1rem] font-semibold font-display my-3">{content.title}</h3>
+                            <p className="card-description text-[var(--color-muted)] text-[0.9rem] font-body leading-relaxed">{content.description}</p>
                         </div>
                     ))
                 }

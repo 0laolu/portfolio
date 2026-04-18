@@ -61,7 +61,7 @@ export default function ContactForm() {
     projectType: "",
     description: "",
     budget: "",
-  });
+});
 
   const [focused, setFocused] = useState(null);
 
@@ -70,7 +70,7 @@ export default function ContactForm() {
   };
 
   return (
-    <section className="w-full py-20 bg-neutral-50">
+    <section className="w-full py-20">
       <div className="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-16 items-start">
         
         {/* LEFT CONTENT */}
@@ -79,19 +79,25 @@ export default function ContactForm() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="text-3xl md:text-4xl font-semibold text-neutral-900">
-            Let’s build something that converts
+          <h2 className="text-3xl md:text-4xl font-semibold font-display text-[var(--color-cream)]">
+            Let's build something that converts
           </h2>
 
-          <p className="mt-4 text-neutral-600 leading-relaxed">
+          <p className="mt-4 text-[var(--color-muted)] leading-relaxed font-body">
             I help businesses design and build fast, conversion-focused websites
             — from landing pages to full web apps.
           </p>
 
-          <ul className="mt-6 space-y-3 text-neutral-700">
-            <li>• Mobile-first, performance-driven</li>
-            <li>• Clear process from idea to launch</li>
-            <li>• Built with scalability in mind</li>
+          <ul className="mt-6 space-y-3 text-[var(--color-muted)] font-body">
+            <li className="flex items-start gap-2">
+              <span className="grad-text mt-[5px]">•</span> Mobile-first, performance-driven
+            </li>
+            <li className="flex items-start gap-2">
+              <span className="grad-text mt-[5px]">•</span> Clear process from idea to launch
+            </li>
+            <li className="flex items-start gap-2">
+              <span className="grad-text mt-[5px]">•</span> Built with scalability in mind
+            </li>
           </ul>
         </motion.div>
 
@@ -100,7 +106,7 @@ export default function ContactForm() {
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.1 }}
-          className="bg-white rounded-2xl shadow-xl p-8 space-y-6"
+          className="card p-8 space-y-6"
         >
           {/* NAME */}
           <FormField
@@ -159,13 +165,13 @@ export default function ContactForm() {
           <motion.button
             whileHover={{ y: -3 }}
             whileTap={{ scale: 0.97 }}
-            className="w-full bg-gray-700 text-white py-4 rounded-xl font-medium tracking-wide shadow-lg hover:bg-indigo-700 transition"
+            className="w-full grad-bg text-[var(--color-bg)] py-4 rounded-xl font-semibold uppercase tracking-widest hover:opacity-90 transition"
           >
             Send Project Brief
           </motion.button>
 
-          <p className="text-xs text-neutral-500 text-center">
-            I’ll respond within 24 hours. No spam — ever.
+          <p className="text-xs text-[var(--color-muted)] text-center font-body">
+            I'll respond within 24 hours. No spam — ever.
           </p>
         </motion.form>
       </div>
@@ -190,7 +196,7 @@ function FormField({
 
   return (
     <div>
-      <label className="block text-sm font-medium text-neutral-700 mb-1">
+      <label className="block uppercase tracking-widest text-sm font-medium text-[var(--color-muted)] mb-2 font-body">
         {label}
       </label>
 
@@ -203,8 +209,7 @@ function FormField({
           onBlur={() => setFocused(null)}
           placeholder={placeholder}
           rows={4}
-          className={`w-full rounded-xl border px-4 py-3 resize-none outline-none transition
-            ${isFocused ? "border-indigo-600 shadow-md" : "border-neutral-300"}`}
+          className={`w-full rounded-xl border px-4 py-3 resize-none outline-none transition font-body placeholder:text-base placeholder:text-[var(--color-dim)] ${isFocused ? "border-[var(--color-g1)] shadow-md bg-[var(--color-surface)]" : "border-[var(--color-border)] bg-[var(--color-card)]"}`}
           initial={false}
           animate={{ scale: isFocused ? 1.02 : 1 }}
         />
@@ -217,8 +222,7 @@ function FormField({
           onFocus={() => setFocused(name)}
           onBlur={() => setFocused(null)}
           placeholder={placeholder}
-          className={`w-full rounded-xl border px-4 py-3 outline-none transition
-            ${isFocused ? "border-indigo-600 shadow-md" : "border-neutral-300"}`}
+          className={`w-full rounded-xl border px-4 py-3 outline-none transition font-body placeholder:text-base placeholder:text-[var(--color-dim)] ${isFocused ? "border-[var(--color-g1)] shadow-md bg-[var(--color-surface)]" : "border-[var(--color-border)] bg-[var(--color-card)]"}`}
           initial={false}
           animate={{ scale: isFocused ? 1.02 : 1 }}
         />
@@ -232,16 +236,16 @@ function AnimatedSelect({ label, name, options, value, onChange }) {
 
   return (
     <div className="relative">
-      <label className="block text-sm font-medium text-neutral-700 mb-1">
+      <label className="block uppercase tracking-widest text-sm font-medium text-[var(--color-muted)] mb-2 font-body">
         {label}
       </label>
 
       <button
         type="button"
         onClick={() => setOpen(!open)}
-        className="w-full rounded-xl border border-neutral-300 px-4 py-3 text-left flex justify-between items-center hover:border-indigo-600 transition"
+        className="w-full rounded-xl border border-[var(--color-border)] px-4 py-3 text-left flex justify-between items-center hover:border-[var(--color-border-hover)] transition font-body text-sm cursor-pointer"
       >
-        <span className={value ? "text-neutral-900" : "text-neutral-400"}>
+        <span className={value ? "text-[var(--color-cream)]" : "text-[var(--color-muted)]"}>
           {value || "Select an option"}
         </span>
         <span className="text-sm">▾</span>
@@ -254,7 +258,7 @@ function AnimatedSelect({ label, name, options, value, onChange }) {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
             transition={{ duration: 0.2 }}
-            className="absolute z-10 mt-2 w-full bg-white rounded-xl shadow-lg overflow-hidden border"
+            className="absolute z-10 mt-2 w-full card rounded-xl shadow-lg overflow-hidden border"
           >
             {options.map((option) => (
               <li
@@ -263,7 +267,7 @@ function AnimatedSelect({ label, name, options, value, onChange }) {
                   onChange({ target: { name, value: option } });
                   setOpen(false);
                 }}
-                className="px-4 py-3 cursor-pointer hover:bg-indigo-50 transition"
+                className="px-4 py-3 cursor-pointer text-[var(--color-muted)] hover:bg-[var(--color-surface)] hover:text-[var(--color-cream)] transition font-body"
               >
                 {option}
               </li>
