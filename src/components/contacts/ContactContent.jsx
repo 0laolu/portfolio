@@ -1,40 +1,3 @@
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-// import { faCheck } from "@fortawesome/free-solid-svg-icons"
-
-// export default function ContactContent() {
-//     return (
-//         <>
-//             <div className="left-col text-[1.2rem] font-league lg:w-1/2">
-//                 <p className="text-center">From clean landing pages to full web apps, I help brands like yours build fast, clean and user-focused websites</p>
-//                 <ul className=" py-5">
-//                     <li><FontAwesomeIcon className="mr-3 text-lime-500" icon={faCheck}/>Need a website that looks great and runs smoothly?</li>
-//                     <li><FontAwesomeIcon className="mr-3 text-lime-500" icon={faCheck}/>Want a developer who understands both design and performance? </li>
-//                     <li><FontAwesomeIcon className="mr-3 text-lime-500" icon={faCheck}/>Want to turn your idea into a digital product that actually works? </li>
-//                 </ul>
-//                 <div className="mt-8">
-//                     <a href="mailto:abdullateefolaolu@gmail.com">
-//                         <button className="w-1/2 mx-auto block border border-gray-400 py-4 rounded-4xl font-semibold cursor-pointer" type="button">Let's Begin!</button>
-//                     </a>
-//                 </div>
-//             </div>
-//             <div className="right-col bg-gray-100 lg:w-1/2">
-//                 <form >
-//                     <div>
-//                         <label htmlFor="fullname">Fullname: </label>
-//                         <input id="fullname" type="text" name="fullname" placeholder="John Schmoe" />
-//                     </div>
-
-//                     <div>
-//                         <label htmlFor="email">Email Address: </label>
-//                         <input id="email" type="email" name="email" placeholder="johnschmoe@example.com" />
-//                     </div>
-//                 </form>
-//             </div>
-//         </>
-//     )
-// }
-
-
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -61,18 +24,56 @@ export default function ContactForm() {
     projectType: "",
     description: "",
     budget: "",
-});
+  });
 
   const [focused, setFocused] = useState(null);
+  const [status, setStatus] = useState("idle");
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setStatus("loading");
+
+    try {
+      const response = await fetch("https://formspree.io/f/xwvangrv", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          name: form.name,
+          email: form.email,
+          projectType: form.projectType,
+          description: form.description,
+          budget: form.budget,
+        }),
+      });
+
+      if (response.ok) {
+        setStatus("success");
+        setForm({
+          name: "",
+          email: "",
+          projectType: "",
+          description: "",
+          budget: "",
+        });
+      } else {
+        setStatus("error");
+      }
+    } catch (err) {
+      setStatus("error");
+    }
+  };
+
   return (
     <section className="w-full py-20">
       <div className="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-16 items-start">
-        
+
         {/* LEFT CONTENT */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -102,78 +103,131 @@ export default function ContactForm() {
         </motion.div>
 
         {/* FORM CARD */}
-        <motion.form
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.1 }}
-          className="card p-8 space-y-6"
-        >
-          {/* NAME */}
-          <FormField
-            label="Full Name"
-            name="name"
-            placeholder="Jane Doe"
-            value={form.name}
-            onChange={handleChange}
-            focused={focused}
-            setFocused={setFocused}
-          />
+        <AnimatePresence mode="wait">
+          {status === "success" ? (
 
-          {/* EMAIL */}
-          <FormField
-            label="Email Address"
-            name="email"
-            type="email"
-            placeholder="jane@company.com"
-            value={form.email}
-            onChange={handleChange}
-            focused={focused}
-            setFocused={setFocused}
-          />
+            // SUCCESS STATE
+            <motion.div
+              key="success"
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.95 }}
+              transition={{ duration: 0.4 }}
+              className="card p-8 flex flex-col items-center justify-center text-center space-y-4 min-h-[400px]"
+            >
+              <div className="w-16 h-16 rounded-full grad-bg flex items-center justify-center text-2xl text-[var(--color-bg)]">
+                ✓
+              </div>
+              <h3 className="text-2xl font-semibold font-display text-[var(--color-cream)]">
+                Message Sent!
+              </h3>
+              <p className="text-[var(--color-muted)] font-body">
+                Thanks for reaching out. I'll get back to you within 24 hours.
+              </p>
+              <motion.button
+                whileHover={{ y: -2 }}
+                whileTap={{ scale: 0.97 }}
+                onClick={() => setStatus("idle")}
+                className="mt-4 px-6 py-3 rounded-xl border border-[var(--color-border)] text-[var(--color-muted)] hover:border-[var(--color-g1)] hover:text-[var(--color-cream)] transition font-body text-sm"
+              >
+                Send another message
+              </motion.button>
+            </motion.div>
 
-          {/* PROJECT TYPE */}
-          <AnimatedSelect
-            label="Project Type"
-            name="projectType"
-            options={projectTypes}
-            value={form.projectType}
-            onChange={handleChange}
-          />
+          ) : (
 
-          {/* DESCRIPTION */}
-          <FormField
-            label="Project Description"
-            name="description"
-            placeholder="Briefly describe what you want to build…"
-            textarea
-            value={form.description}
-            onChange={handleChange}
-            focused={focused}
-            setFocused={setFocused}
-          />
+            // FORM STATE
+            <motion.form
+              key="form"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              onSubmit={handleSubmit}
+              className="card p-8 space-y-6"
+            >
+              <FormField
+                label="Full Name"
+                name="name"
+                placeholder="E.g Scott McFarlane"
+                value={form.name}
+                onChange={handleChange}
+                focused={focused}
+                setFocused={setFocused}
+                required
+              />
 
-          {/* BUDGET */}
-          <AnimatedSelect
-            label="Approx. Budget (optional)"
-            name="budget"
-            options={budgets}
-            value={form.budget}
-            onChange={handleChange}
-          />
+              <FormField
+                label="Email Address"
+                name="email"
+                type="email"
+                placeholder="scott13@gmail.com"
+                value={form.email}
+                onChange={handleChange}
+                focused={focused}
+                setFocused={setFocused}
+                required
+              />
 
-          {/* CTA */}
-          <motion.button
-            whileHover={{ y: -3 }}
-            whileTap={{ scale: 0.97 }}
-            className="w-full grad-bg text-[var(--color-bg)] py-4 rounded-xl font-semibold uppercase tracking-widest hover:opacity-90 transition"
-          >
-            Send Project Brief
-          </motion.button>
+              <AnimatedSelect
+                label="Project Type"
+                name="projectType"
+                options={projectTypes}
+                value={form.projectType}
+                onChange={handleChange}
+              />
 
-          <p className="text-xs text-[var(--color-muted)] text-center font-body">
-            I'll respond within 24 hours. No spam — ever.
-          </p>
-        </motion.form>
+              <FormField
+                label="Project Description"
+                name="description"
+                placeholder="Briefly describe what you want to build…"
+                textarea
+                value={form.description}
+                onChange={handleChange}
+                focused={focused}
+                setFocused={setFocused}
+              />
+
+              <AnimatedSelect
+                label="Approx. Budget (optional)"
+                name="budget"
+                options={budgets}
+                value={form.budget}
+                onChange={handleChange}
+              />
+
+              {/* ERROR MESSAGE */}
+              {status === "error" && (
+                <motion.p
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  className="text-sm text-red-400 text-center font-body"
+                >
+                  Something went wrong. Please try again or email me directly at{" "}
+                  <a
+                    href="mailto:abdullateefolaolu@gmail.com"
+                    className="underline hover:text-red-300"
+                  >
+                    abdullateefolaolu@gmail.com
+                  </a>
+                </motion.p>
+              )}
+
+              <motion.button
+                whileHover={{ y: -3 }}
+                whileTap={{ scale: 0.97 }}
+                type="submit"
+                disabled={status === "loading"}
+                className="w-full grad-bg text-[var(--color-bg)] py-4 rounded-xl font-semibold uppercase tracking-widest hover:opacity-90 cursor-pointer transition disabled:opacity-60 disabled:cursor-not-allowed"
+              >
+                {status === "loading" ? "Sending…" : "Send Project Brief"}
+              </motion.button>
+
+              <p className="text-xs text-[var(--color-muted)] text-center font-body">
+                I'll respond within 24 hours. No spam — ever.
+              </p>
+            </motion.form>
+          )}
+        </AnimatePresence>
       </div>
     </section>
   );
@@ -191,6 +245,7 @@ function FormField({
   onChange,
   focused,
   setFocused,
+  required = false,
 }) {
   const isFocused = focused === name;
 
@@ -209,7 +264,12 @@ function FormField({
           onBlur={() => setFocused(null)}
           placeholder={placeholder}
           rows={4}
-          className={`w-full rounded-xl border px-4 py-3 resize-none outline-none transition font-body placeholder:text-base placeholder:text-[var(--color-dim)] ${isFocused ? "border-[var(--color-g1)] shadow-md bg-[var(--color-surface)]" : "border-[var(--color-border)] bg-[var(--color-card)]"}`}
+          required={required}
+          className={`w-full rounded-xl border px-4 py-3 resize-none outline-none transition font-body placeholder:text-base placeholder:text-[var(--color-dim)] ${
+            isFocused
+              ? "border-[var(--color-g1)] shadow-md bg-[var(--color-surface)]"
+              : "border-[var(--color-border)] bg-[var(--color-card)]"
+          }`}
           initial={false}
           animate={{ scale: isFocused ? 1.02 : 1 }}
         />
@@ -222,7 +282,12 @@ function FormField({
           onFocus={() => setFocused(name)}
           onBlur={() => setFocused(null)}
           placeholder={placeholder}
-          className={`w-full rounded-xl border px-4 py-3 outline-none transition font-body placeholder:text-base placeholder:text-[var(--color-dim)] ${isFocused ? "border-[var(--color-g1)] shadow-md bg-[var(--color-surface)]" : "border-[var(--color-border)] bg-[var(--color-card)]"}`}
+          required={required}
+          className={`w-full rounded-xl border px-4 py-3 outline-none transition font-body placeholder:text-base placeholder:text-[var(--color-dim)] ${
+            isFocused
+              ? "border-[var(--color-g1)] shadow-md bg-[var(--color-surface)]"
+              : "border-[var(--color-border)] bg-[var(--color-card)]"
+          }`}
           initial={false}
           animate={{ scale: isFocused ? 1.02 : 1 }}
         />
