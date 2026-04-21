@@ -98,7 +98,26 @@ export default function Navbar() {
 
         {showScrollTop && (
             <button
-                onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+                onClick={() => {
+                    const start = window.scrollY;
+                    const duration = 1000;
+                    const startTime = performance.now();
+                    
+                    const easeOutQuad = (t) => t * (2 - t);
+                    
+                    const animateScroll = (currentTime) => {
+                        const elapsed = currentTime - startTime;
+                        const progress = Math.min(elapsed / duration, 1);
+                        const easeProgress = easeOutQuad(progress);
+                        window.scrollTo(0, start * (1 - easeProgress));
+                        
+                        if (progress < 1) {
+                            requestAnimationFrame(animateScroll);
+                        }
+                    };
+                    
+                    requestAnimationFrame(animateScroll);
+                }}
                 className="fixed bottom-8 right-8 w-12 h-12 rounded-full flex items-center justify-center cursor-pointer transition-all duration-300 z-50 animate-slide-in animate-glow glow-btn"
             >
                 <FontAwesomeIcon icon={faArrowUp} className="grad-text-vertical text-lg" />
