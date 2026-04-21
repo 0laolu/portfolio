@@ -1,9 +1,12 @@
 import { useState, useRef, useEffect } from "react"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faArrowUp } from "@fortawesome/free-solid-svg-icons"
 
 export default function Navbar() {
 
     const [isActive, setIsActive] = useState(false)
     const [activeSection, setActiveSection] = useState('')
+    const [showScrollTop, setShowScrollTop] = useState(false)
 
     const navLinksRef = useRef()
     const menuBarRef = useRef()
@@ -51,10 +54,28 @@ export default function Navbar() {
         return () => window.removeEventListener('scroll', handleScroll)
     }, [])
 
+    useEffect(() => {
+        const handleScrollPosition = () => {
+            const scrollY = window.scrollY
+            const servicesSection = document.getElementById('services')
+            if (servicesSection && scrollY > servicesSection.offsetTop) {
+                setShowScrollTop(true)
+            } else {
+                setShowScrollTop(false)
+            }
+        }
+
+        window.addEventListener('scroll', handleScrollPosition)
+        handleScrollPosition()
+
+        return () => window.removeEventListener('scroll', handleScrollPosition)
+    }, [])
+
     return (
-        <header className="fixed top-0 w-full z-50 bg-[var(--color-bg)] shadow-lg">
-            <nav className=" w-93/100 max-w-[800px] mx-auto pt-4 flex justify-between items-center lg:max-w-[1440px] lg:pt-0">
-                <a href="/" className="grad-text text-2xl font-bold font-display tracking-tight">olaolu.</a>
+        <>
+            <header className="fixed top-0 w-full z-50 bg-[var(--color-bg)] shadow-lg">
+                <nav className=" w-93/100 max-w-[800px] mx-auto pt-4 flex justify-between items-center lg:max-w-[1440px] lg:pt-0">
+                    <a href="/" className="grad-text text-2xl font-bold font-display tracking-tight">olaolu.</a>
 
                 <div ref={menuBarRef} onClick={showNavbar} className="hamburger-menu w-[28px] block relative top-0 cursor-pointer bg-none outline-none z-100 lg:invisible [-webkit-tap-highlight-color: transparent]">
                     <span className={`bg-[var(--color-cream)] block w-full h-[3px] rounded-lg my-[5px] transition duration-400 lg:transition-none ${isActive ? "transform rotate-[-45deg] translate-x-[-8px] translate-y-[6px]" : "transform-none rotate-none translate-none"}`}></span>
@@ -74,5 +95,15 @@ export default function Navbar() {
                 </ul>
             </nav>
         </header>
+
+        {showScrollTop && (
+            <button
+                onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+                className="fixed bottom-8 right-8 w-12 h-12 rounded-full flex items-center justify-center cursor-pointer transition-all duration-300 z-50 animate-slide-in animate-glow glow-btn"
+            >
+                <FontAwesomeIcon icon={faArrowUp} className="grad-text-vertical text-lg" />
+            </button>
+        )}
+        </>
     )
 }

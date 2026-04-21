@@ -111,6 +111,14 @@
         background-clip: text;
     }
 
+    /* --- Gradient text vertical (bottom to top) --- */
+    .grad-text-vertical {
+        background: linear-gradient(180deg, #C8F026 0%, #4FCB8D 50%, #1DA8A0 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+
     /* --- Gradient background (for buttons, dots, badges) --- */
     .grad-bg {
         background: linear-gradient(95deg, #C8F026 0%, #4FCB8D 50%, #1DA8A0 100%);
@@ -146,6 +154,44 @@
     }
     .glow-teal {
         background: radial-gradient(circle, rgba(29, 168, 160, 0.08) 0%, transparent 70%);
+    }
+
+    /* --- Slide in animation --- */
+    @keyframes slideIn {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    .animate-slide-in {
+        animation: slideIn 0.3s ease-out forwards;
+    }
+
+    /* --- Glow pulse animation --- */
+    @keyframes glowPulse {
+        0% {
+            box-shadow: 0 0 0 0 rgba(200, 240, 38, 0.4);
+        }
+        70% {
+            box-shadow: 0 0 0 10px rgba(200, 240, 38, 0);
+        }
+        100% {
+            box-shadow: 0 0 0 0 rgba(200, 240, 38, 0);
+        }
+    }
+    .animate-glow {
+        animation: glowPulse 2s infinite;
+    }
+
+    /* --- Gradient border for button --- */
+    .glow-btn {
+        border: 2px solid transparent;
+        background: linear-gradient(var(--color-bg), var(--color-bg)) padding-box,
+                    linear-gradient(180deg, var(--color-g1), var(--color-g2), var(--color-g3)) border-box;
     }
 
     /* --- Card base --- */
