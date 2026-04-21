@@ -1,21 +1,44 @@
+import { motion } from "framer-motion"
+
+const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+        opacity: 1,
+        transition: {
+            staggerChildren: 0.3
+        }
+    }
+}
+
+const itemVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
+}
+
 export default function AboutContent() {
     return(
-        <div className="about-content-wrapper w-full my-16">
+        <motion.div 
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+            variants={containerVariants}
+            className="about-content-wrapper w-full my-16"
+        >
             <div className="about-content w-full flex flex-col lg:flex-row justify-between gap-8">
                 {
                     contentData.map((content, index) => (
-                        <div key={content.id} className="content-card w-full lg:w-[345.58px] text-center">
+                        <motion.div key={content.id} variants={itemVariants} className="content-card w-full lg:w-[345.58px] text-center">
                             <div className="numbers-container mx-auto relative mt-4 mb-6">
                                 <span className="w-full flex absolute top-7 z-[-2] opacity-20 lg:hidden" style={{ borderTop: '1px solid var(--color-border-hover)' }}></span>
                                 <p className="grad-bg text-lg text-[var(--color-bg)] font-semibold rounded-full py-3 px-[1.35rem] mx-auto w-fit">{index + 1}</p>
                             </div>
                             <h3 className="card-title text-[var(--color-cream)] text-[1.1rem] font-semibold font-display my-3">{content.title}</h3>
                             <p className="card-description text-[var(--color-muted)] text-[0.9rem] font-body leading-relaxed">{content.description}</p>
-                        </div>
+                        </motion.div>
                     ))
                 }
             </div>
-        </div>
+        </motion.div>
     )
 }
 

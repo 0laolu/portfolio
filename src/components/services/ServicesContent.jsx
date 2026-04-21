@@ -1,13 +1,22 @@
+import { motion } from "framer-motion"
 import { faArrowTrendUp, faHandHoldingUsd, faNewspaper, faServer, faUserCheck } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+
 export default function ServicesContent() {
 
 
     return (
         <div className="my-8 lg:flex lg:flex-wrap lg:justify-between lg:gap-6">
             {
-                services.map(service => (
-                    <div key={service.id} className="lg:w-[calc(50%-12px)]">
+                services.map((service, index) => (
+                    <motion.div 
+                        key={service.id}
+                        initial={{ opacity: 0, y: 30 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true, margin: "-50px" }}
+                        transition={{ duration: 0.5 }}
+                        className="lg:w-[calc(50%-12px)]"
+                    >
                         <div className="card p-6 mb-6">
                             <div className="grad-bg w-12 h-12 rounded-lg flex items-center justify-center mb-5">
                                 <FontAwesomeIcon icon={service.icon} className="text-xl text-[var(--color-bg)]" />
@@ -25,7 +34,7 @@ export default function ServicesContent() {
                                 }
                             </ul>
                         </div>
-                    </div>
+                    </motion.div>
                 ))
             }
 

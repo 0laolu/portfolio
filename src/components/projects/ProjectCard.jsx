@@ -1,3 +1,4 @@
+import { motion } from "framer-motion"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faArrowUpRightFromSquare } from "@fortawesome/free-solid-svg-icons"
 import { Link } from "react-router-dom"
@@ -11,14 +12,40 @@ export default function ProjectCard() {
                     <div key={info.id} className="flex flex-col lg:flex-row lg:justify-between lg:items-center gap-8 my-12">
                         <div className="lg:w-9/20">
                             <div className="text-[var(--color-muted)] text-[1rem] font-body">
-                                <h4 className="text-[var(--color-cream)] font-bold text-2xl lg:text-3xl font-display mb-4">{info.title}</h4>
-                                <p className="project-description mb-6 text-[var(--color-muted)]">{info.description}</p>
+                                <motion.div
+                                    initial={{ opacity: 0, x: -30 }}
+                                    whileInView={{ opacity: 1, x: 0 }}
+                                    viewport={{ once: true, margin: "-50px" }}
+                                    transition={{ duration: 0.5 }}
+                                >
+                                    <h4 className="text-[var(--color-cream)] font-bold text-2xl lg:text-3xl font-display mb-4">{info.title}</h4>
+                                </motion.div>
+                                <motion.div
+                                    initial={{ opacity: 0, x: -30 }}
+                                    whileInView={{ opacity: 1, x: 0 }}
+                                    viewport={{ once: true, margin: "-50px" }}
+                                    transition={{ duration: 0.5, delay: 0.1 }}
+                                >
+                                    <p className="project-description mb-6 text-[var(--color-muted)]">{info.description}</p>
+                                </motion.div>
                                 
-                                <div className="mb-5">
+                                <motion.div
+                                    initial={{ opacity: 0, x: -30 }}
+                                    whileInView={{ opacity: 1, x: 0 }}
+                                    viewport={{ once: true, margin: "-50px" }}
+                                    transition={{ duration: 0.5, delay: 0.2 }}
+                                    className="mb-5"
+                                >
                                     <h4 className="text-[var(--color-cream)] text-[1rem] font-semibold font-display">Who This Was For:</h4>
                                     <p className="text-[var(--color-muted)] mt-1">{info.targetAudience}</p>
-                                </div>
-                                <div className="mb-5">
+                                </motion.div>
+                                <motion.div
+                                    initial={{ opacity: 0, x: -30 }}
+                                    whileInView={{ opacity: 1, x: 0 }}
+                                    viewport={{ once: true, margin: "-50px" }}
+                                    transition={{ duration: 0.5, delay: 0.3 }}
+                                    className="mb-5"
+                                >
                                     <span className="text-[var(--color-cream)] text-[1rem] font-semibold font-display block">What I Did:</span>
                                     <ul className="mt-2 space-y-2">
                                         <li className="text-[var(--color-muted)] flex items-start gap-2">
@@ -42,20 +69,39 @@ export default function ProjectCard() {
                                             {info.role.fourth}
                                         </li>
                                     </ul>
-                                </div>
-                                <div className="mb-6">
+                                </motion.div>
+                                <motion.div
+                                    initial={{ opacity: 0, x: -30 }}
+                                    whileInView={{ opacity: 1, x: 0 }}
+                                    viewport={{ once: true, margin: "-50px" }}
+                                    transition={{ duration: 0.5, delay: 0.4 }}
+                                    className="mb-6"
+                                >
                                     <h4 className="text-[var(--color-cream)] text-[1rem] font-semibold font-display">Result:</h4>
                                     <p className="text-[var(--color-muted)] mt-1">{info.result}</p>
-                                </div>
-                                <ul className="project-tools flex flex-wrap gap-3">
-                                    {
-                                        info.tools.map(tool => (
-                                            <li key={tool} className="tech-pill">{tool}</li>
-                                        ))
-                                    }
-                                </ul>
+                                </motion.div>
+                                <motion.div
+                                    initial={{ opacity: 0, x: -30 }}
+                                    whileInView={{ opacity: 1, x: 0 }}
+                                    viewport={{ once: true, margin: "-50px" }}
+                                    transition={{ duration: 0.5, delay: 0.5 }}
+                                >
+                                    <ul className="project-tools flex flex-wrap gap-3">
+                                        {
+                                            info.tools.map(tool => (
+                                                <li key={tool} className="tech-pill">{tool}</li>
+                                            ))
+                                        }
+                                    </ul>
+                                </motion.div>
 
-                                <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 mt-8 lg:mx-0">
+                                <motion.div
+                                    initial={{ opacity: 0, x: -30 }}
+                                    whileInView={{ opacity: 1, x: 0 }}
+                                    viewport={{ once: true, margin: "-50px" }}
+                                    transition={{ duration: 0.5, delay: 0.6 }}
+                                    className="flex flex-col sm:flex-row items-start sm:items-center gap-4 mt-8 lg:mx-0"
+                                >
                                     <a href={info.liveUrl} className="btn-ghost text-center text-[0.85rem]">
                                         <span className="mr-2">Live URL</span>
                                         <FontAwesomeIcon icon={faArrowUpRightFromSquare}/>
@@ -67,14 +113,20 @@ export default function ProjectCard() {
                                     >
                                         View Case Study
                                     </Link>
-                                </div>
+                                </motion.div>
                             </div>
                         </div>
 
-                        <div className="img-container lg:w-12/25 group overflow-hidden rounded-lg relative">
+                        <motion.div
+                            initial={{ opacity: 0, x: 30 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            viewport={{ once: true, margin: "-50px" }}
+                            transition={{ duration: 0.6, delay: 0.3 }}
+                            className="img-container lg:w-12/25 group overflow-hidden rounded-lg relative"
+                        >
                             <img src={info.image} alt={`${info.title} mockup`} className="w-full transition-transform duration-300 group-hover:scale-105" />
                             <div className="absolute inset-0 grad-bg opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
-                        </div>
+                        </motion.div>
                     </div>
                 ))
             }
