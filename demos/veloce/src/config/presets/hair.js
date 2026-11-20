@@ -21,9 +21,9 @@ export default {
     basePrice: 285000_00,
     badge: "Ready to Ship • Lagos",
     images: [
-      { alt: "Body wave unit, front view", tones: ["#3b2a1f", "#8a5a3b"] },
-      { alt: "Body wave unit, side profile", tones: ["#2a1e17", "#b07d56"] },
-      { alt: "Lace close-up", tones: ["#4a3426", "#d4a373"] },
+      { src: "img/hair/wig_main_angle.webp", alt: "Body wave unit, front view", tones: ["#3b2a1f", "#8a5a3b"] },
+      { src: "img/hair/wig_rear_angle.webp", alt: "Body wave unit, rear profile", tones: ["#2a1e17", "#b07d56"] },
+      { src: "img/hair/wig_lace_angle.webp", alt: "Lace close-up", tones: ["#4a3426", "#d4a373"] },
     ],
   },
   trust: { rating: "4.9", reviews: "1.2k", promise: "Ships to UK/US in 3–5 days" },
