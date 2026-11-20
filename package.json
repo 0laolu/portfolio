@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build:veloce": "npm --prefix demos/veloce install && npm --prefix demos/veloce run build -- --outDir ../../public/demos/veloce --emptyOutDir",
+    "build": "npm run build:veloce && vite build",
     "lint": "eslint .",
     "preview": "vite preview"
   },

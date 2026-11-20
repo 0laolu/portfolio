@@ -57,7 +57,7 @@ export default function Hero() {
                     transition={{ duration: 0.5, delay: 0.4 }}
                     className=" mt-8 max-w-[605px] sm:flex sm:justify-between lg:max-w-[550px]"
                 >
-                    <button className="w-full max-w-[400px] btn-primary grad-bg py-4 mb-3 font-semibold cursor-pointer sm:mr-0 sm:mb-0 lg:w-9/10 lg:max-w-[240px] lg:text-lg  lg:mb-0" type="button"><a href="#work">See It in Action</a></button>
+                    <button className="w-full max-w-[400px] btn-primary grad-bg py-4 mb-3 font-semibold cursor-pointer sm:mr-0 sm:mb-0 lg:w-9/10 lg:max-w-[240px] lg:text-lg  lg:mb-0" type="button"><a href="/demos/veloce/">View Live Demo</a></button>
                     <button className="w-full max-w-[400px]  btn-ghost py-4 font-semibold cursor-pointer lg:text-lg lg:max-w-[280px]" type="button"><a href="#contact">Let's Work Together</a></button>
                 </motion.div>
 
