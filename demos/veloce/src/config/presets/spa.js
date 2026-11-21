@@ -20,9 +20,9 @@ export default {
     basePrice: 75000_00,
     badge: "Slots open this week",
     images: [
-      { alt: "Treatment room", tones: ["#dfe7df", "#9fb5a5"] },
-      { alt: "HydraFacial session", tones: ["#e9e2d6", "#b9a88d"] },
-      { alt: "LED therapy", tones: ["#dbe4e8", "#7e9aa6"] },
+      { src: "img/spa/spa_reception_angle.webp", alt: "Reception room", tones: ["#dfe7df", "#9fb5a5"] },
+      { src: "img/spa/spa_main_angle.webp", alt: "Treatment room", tones: ["#e9e2d6", "#b9a88d"] },
+      { src: "img/spa/spa_model_angle.webp", alt: "Facial session", tones: ["#dbe4e8", "#7e9aa6"] },
     ],
   },
   trust: { rating: "4.9", reviews: "870", promise: "Booking from abroad? Pay now, redeem when you land" },
