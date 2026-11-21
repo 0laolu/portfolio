@@ -18,9 +18,9 @@ export default {
     basePrice: 420000_00,
     badge: "Made to Order • 5 days",
     images: [
-      { alt: "Solitaire ring on velvet", tones: ["#141c26", "#5a6b80"] },
-      { alt: "Ring band profile", tones: ["#1a2330", "#c9a54e"] },
-      { alt: "Stone close-up", tones: ["#0f1620", "#e6c66e"] },
+      { src:"img/jewelry/jewelry_main_angle.webp", alt: "Solitaire ring on velvet", tones: ["#141c26", "#5a6b80"] },
+      { src:"img/jewelry/jewelry_side_angle.webp", alt: "Ring band profile", tones: ["#1a2330", "#c9a54e"] },
+      { src:"img/jewelry/jewelry_close_angle.webp", alt: "Stone close-up", tones: ["#0f1620", "#e6c66e"] },
     ],
   },
   trust: { rating: "5.0", reviews: "640", promise: "Insured delivery to UK/US" },
