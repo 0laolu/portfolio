@@ -33,7 +33,7 @@ export default function DeliveryRouter() {
                   <span className="block text-[11px] text-muted">{mode.sub}</span>
                 </span>
                 <span className="text-xs font-semibold">
-                  {minFee === 0 && fees.every((f) => f === 0) ? "Free" : `from ${fmt(minFee)}`}
+                  {minFee === 0 ? (fees.every((f) => f === 0) ? "Free" : "From free") : `from ${fmt(minFee)}`}
                 </span>
               </button>
 

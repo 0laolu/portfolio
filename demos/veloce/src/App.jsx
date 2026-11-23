@@ -4,6 +4,7 @@ import DemoControlBar from "./components/DemoControlBar.jsx";
 import PhoneShell from "./components/PhoneShell.jsx";
 import Header from "./components/Header.jsx";
 import MediaCarousel from "./components/MediaCarousel.jsx";
+import CollectionTabs from "./components/CollectionTabs.jsx";
 import ProductInfo from "./components/ProductInfo.jsx";
 import Configurator from "./components/Configurator.jsx";
 import DeliveryRouter from "./components/DeliveryRouter.jsx";
@@ -27,7 +28,10 @@ function Storefront() {
             transition={{ duration: 0.2 }}
             className="flex-1 pb-6"
           >
-            <MediaCarousel />
+            <div className="relative">
+              <MediaCarousel key={preset.collectionId ?? preset.id} />
+              <CollectionTabs />
+            </div>
             <ProductInfo />
             <Configurator />
             <DeliveryRouter />

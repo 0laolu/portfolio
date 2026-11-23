@@ -1,11 +1,18 @@
 import { generateOrderRef } from "../lib/ref.js";
+import { resolvePreset } from "../config/presets/index.js";
 
-export function createInitialState(preset, currency = "NGN") {
+function defaultSelections(preset) {
+  return Object.fromEntries(preset.variantGroups.map((g) => [g.id, g.options[0].id]));
+}
+
+export function createInitialState(rawPreset, currency = "NGN", collectionId) {
+  const preset = resolvePreset(rawPreset, collectionId);
   const firstMode = preset.fulfillment.modes[0];
   return {
     presetId: preset.id,
+    collectionId: preset.collectionId ?? null,
     currency,
-    selections: Object.fromEntries(preset.variantGroups.map((g) => [g.id, g.options[0].id])),
+    selections: defaultSelections(preset),
     notes: "",
     fulfillment: { mode: firstMode.id, choice: firstMode.choices[0].id },
     modal: null, // "pay" | "receipt" | "whatsapp" | null
@@ -20,6 +27,16 @@ export function orderReducer(state, action) {
     case "SET_PRESET":
       // Full reset on niche switch, but keep the buyer's currency.
       return createInitialState(action.preset, state.currency);
+    case "SET_COLLECTION": {
+      // Switch Menswear/Womenswear: new options, same currency & delivery choice.
+      const resolved = resolvePreset(action.preset, action.collectionId);
+      return {
+        ...state,
+        collectionId: resolved.collectionId,
+        selections: defaultSelections(resolved),
+        notes: "",
+      };
+    }
     case "SET_CURRENCY":
       return { ...state, currency: action.currency };
     case "SELECT":

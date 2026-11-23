@@ -1,6 +1,7 @@
 import { describe, it, expect } from "vitest";
 import hair from "../config/presets/hair.js";
-import { PRESET_LIST } from "../config/presets/index.js";
+import { PRESET_LIST, resolvePreset } from "../config/presets/index.js";
+import { RATES } from "../config/currencies.js";
 import { createInitialState, orderReducer } from "../state/orderReducer.js";
 import { computeTotals } from "./totals.js";
 import { formatMoney, convert } from "./money.js";
@@ -11,7 +12,7 @@ describe("money", () => {
     expect(formatMoney(285000_00, "NGN")).toContain("285,000");
   });
   it("converts NGN to GBP with demo rate", () => {
-    expect(convert(2050_00, "GBP")).toBe(1);
+    expect(convert(RATES.GBP * 100, "GBP")).toBe(1);
   });
 });
 
@@ -26,7 +27,8 @@ describe("totals", () => {
 
   it("every preset produces a valid default total", () => {
     for (const p of PRESET_LIST) {
-      const t = computeTotals(p, createInitialState(p));
+      const s = createInitialState(p);
+      const t = computeTotals(resolvePreset(p, s.collectionId), s);
       expect(Number.isInteger(t.total)).toBe(true);
       expect(t.total).toBeGreaterThan(0);
     }
@@ -50,5 +52,29 @@ describe("whatsapp", () => {
     const link = buildWhatsAppLink("2348000000000", msg);
     expect(link).toMatch(/^https:\/\/wa\.me\/2348000000000\?text=/);
     expect(link).not.toContain("&b"); // ampersand must be encoded
+  });
+});
+
+describe("collections (apparel)", () => {
+  it("defaults to the first collection and switches cleanly", async () => {
+    const { default: apparel } = await import("../config/presets/apparel.js");
+    const { resolvePreset } = await import("../config/presets/index.js");
+    let s = createInitialState(apparel);
+    expect(s.collectionId).toBe("men");
+    expect(computeTotals(resolvePreset(apparel, s.collectionId), s).total).toBe(95000_00);
+
+    s = orderReducer(s, { type: "SET_MODE", mode: "intl", choice: "uk" });
+    s = orderReducer(s, { type: "SET_COLLECTION", preset: apparel, collectionId: "women" });
+    expect(s.collectionId).toBe("women");
+    expect(s.selections).toEqual({ style: "adire", size: "8-10", finish: "classic" });
+    expect(s.fulfillment.choice).toBe("uk"); // delivery choice survives the switch
+
+    s = orderReducer(s, { type: "SELECT", group: "style", option: "irobuba" });
+    expect(computeTotals(resolvePreset(apparel, "women"), s).total).toBe(420000_00 + 70000_00);
+  });
+
+  it("presets without collections are unchanged", async () => {
+    const { resolvePreset } = await import("../config/presets/index.js");
+    expect(resolvePreset(hair, "anything")).toBe(hair);
   });
 });

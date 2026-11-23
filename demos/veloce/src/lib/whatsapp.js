@@ -14,7 +14,7 @@ export function buildWhatsAppMessage({ preset, state, totals }) {
     `*Selected specs:*\n${specs}`,
     state.notes.trim() && `*${preset.notesLabel}:* ${state.notes.trim()}`,
     `*${preset.fulfillment.title}:* ${totals.fulfillmentLabel}`,
-    `*Subtotal:* ${fmt(totals.subtotal)}\n*${preset.fulfillment.title} fee:* ${fmt(totals.shipping)}\n*Total:* ${fmt(totals.total)}${ngnNote}`,
+    `*Subtotal:* ${fmt(totals.subtotal)}\n*${preset.fulfillment.title} fee:* ${totals.shipping ? fmt(totals.shipping) : "Free"}\n*Total:* ${fmt(totals.total)}${ngnNote}`,
     `Sent via Veloce Commerce`,
   ]
     .filter(Boolean)
