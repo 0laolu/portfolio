@@ -34,9 +34,9 @@ export default {
         basePrice: 95000_00,
         badge: "Made to Order • 7–10 days",
         images: [
-          { alt: "Senator two-piece, full-length front view", tones: ["#1c2442", "#4a5b8f"] },
-          { alt: "Neckline embroidery detail", tones: ["#2b3a67", "#b9a27a"] },
-          { alt: "Fabric texture close-up", tones: ["#232a45", "#8c9bc4"] },
+          {src:"img/apparel/men/men_agbada_apparel.webp", alt: "Senator two-piece, full-length front view", tones: ["#1c2442", "#4a5b8f"] },
+          {src:"img/apparel/men/men_kaftan_apparel.webp", alt: "Neckline embroidery detail", tones: ["#2b3a67", "#b9a27a"] },
+          {src:"img/apparel/men/men_senator_apparel.webp", alt: "Fabric texture close-up", tones: ["#232a45", "#8c9bc4"] },
         ],
       },
       variantGroups: [
@@ -44,9 +44,9 @@ export default {
           id: "style",
           label: "Style",
           options: [
-            { id: "senator", label: "Senator Two-Piece", add: 0 }, // ₦95,000
+            { id: "senator", label: "Agbada Three-Piece", add: 0 }, // ₦95,000
             { id: "kaftan", label: "Kaftan Set", add: 25000_00 }, // ₦120,000
-            { id: "agbada", label: "Agbada Three-Piece", add: 115000_00 }, // ₦210,000
+            { id: "agbada", label: "Senator Two-Piece", add: 115000_00 }, // ₦210,000
           ],
         },
         {
@@ -76,15 +76,24 @@ export default {
     {
       id: "women",
       label: "Womenswear",
+      theme: {
+        bg: "#2a171f",
+        surface: "#3a2129",
+        border: "#553241",
+        text: "#f6ebe6",
+        muted: "#c4a3ab",
+        accent: "#c9a35a",
+        accentInk: "#22130f",
+      },
       product: {
         title: "The Owambe Edit",
         tagline: "Cut to your shape • styled for weddings & celebrations",
         basePrice: 85000_00,
         badge: "Made to Order • 10–14 days",
         images: [
-          { alt: "Aso-oke iro and buba with gele, full-length", tones: ["#3a2a4a", "#b07d56"] },
-          { alt: "Hand-beaded lace detail", tones: ["#2b3a67", "#d9c59a"] },
-          { alt: "Adire kaftan dress in motion", tones: ["#1f3557", "#7fa0c8"] },
+          {src:"img/apparel/women/women_iro&buba_apparel.webp", alt: "Plum lace midi dress with bell sleeves and gele", tones: ["#3a2a4a", "#b07d56"] },
+          {src:"img/apparel/women/women_lace_gown_apparel.webp", alt: "Off-shoulder plum and gold beaded lace gown with gele", tones: ["#2b3a67", "#d9c59a"] },
+          {src:"img/apparel/women/women_adiire_kaftan_apparel.webp", alt: "Plum lace midi dress with bell sleeves and gele", tones: ["#1f3557", "#7fa0c8"] },
         ],
       },
       variantGroups: [
@@ -92,9 +101,9 @@ export default {
           id: "style",
           label: "Style",
           options: [
-            { id: "adire", label: "Adire Kaftan Dress", add: 0 }, // ₦85,000
+            { id: "adire", label: "Aso-oke Iro & Buba Set", add: 0 }, // ₦85,000
             { id: "lace", label: "Asoebi Lace Gown", add: 95000_00 }, // ₦180,000
-            { id: "irobuba", label: "Aso-oke Iro & Buba Set", add: 335000_00 }, // ₦420,000 (buba, iro, gele, ipele)
+            { id: "irobuba", label: "Adire Kaftan Dress", add: 335000_00 }, // ₦420,000 (buba, iro, gele, ipele)
           ],
         },
         {

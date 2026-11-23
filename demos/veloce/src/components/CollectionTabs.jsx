@@ -8,7 +8,7 @@ export default function CollectionTabs() {
   if (!rawPreset.collections?.length) return null;
 
   return (
-    <div className="pointer-events-none absolute inset-x-0 top-7 z-10 flex justify-center">
+    <div  className="pointer-events-none absolute inset-x-0 bottom-14 z-10 flex justify-center">
       <div role="tablist" aria-label="Collection" className="pointer-events-auto flex rounded-full bg-black/45 p-1 backdrop-blur-md">
         {rawPreset.collections.map((c) => {
           const active = state.collectionId === c.id;
